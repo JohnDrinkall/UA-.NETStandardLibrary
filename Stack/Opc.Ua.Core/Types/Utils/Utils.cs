@@ -82,16 +82,16 @@ namespace Opc.Ua
         /// </summary>
         public static string DefaultLocalFolder = Directory.GetCurrentDirectory();
 
-        #endregion
+#endregion
 
-        #region Trace Support
+#region Trace Support
 #if DEBUG
         private static int s_traceOutput = (int)TraceOutput.DebugAndFile;
         private static int s_traceMasks = (int)TraceMasks.All;
 #else
         private static int s_traceOutput = (int)TraceOutput.FileOnly;
         private static int s_traceMasks = (int)TraceMasks.None;
-        #endif
+#endif
 
         private static string s_traceFileName = string.Empty;
         private static long s_BaseLineTicks = DateTime.UtcNow.Ticks;
@@ -517,10 +517,18 @@ namespace Opc.Ua
             }
             else
             {
-                if (folder == "LocalFolder")
+                if (string.Compare(folder, "LocalFolder", true) == 0)
                 {
                     buffer.Append(DefaultLocalFolder);
                 }
+
+#if WINDOWS_UWP
+                if (string.Compare(folder, "LocalCache", true) == 0)
+                {
+                    buffer.Append(Windows.Storage.ApplicationData.Current.LocalCacheFolder.Path);
+                }
+#endif
+
             }
 
             // construct new path.

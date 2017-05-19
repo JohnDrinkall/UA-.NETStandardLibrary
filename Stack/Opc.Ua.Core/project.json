@@ -23,11 +23,14 @@
         "Microsoft.AspNetCore.Server.Kestrel.Https": "1.0.0"
       }
     },
-    "uap10.0": {
-      "dependencies": {
+    "uap10.0": 
+    {
+      "dependencies": 
+      {
         "System.Net.NameResolution": "4.0.0"
       },
-      "buildOptions": {
+      "buildOptions": 
+      {
         "define": [ "NO_HTTPS" ]
       }
     }
